@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Caça palavras</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id = "tabuleiro"></div>
+
+    <script>
+        var alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var tabuleiro = [];
+        var tamanho = 5;
+        var selecionados = [];
+        // preenche tabuleiro com letras aleatórias
+        for(var i = 0; i < tamanho; i ++)
+        {
+            tabuleiro[i] = [];
+            for(var j = 0; j < tamanho; j++)
+            {
+                tabuleiro[i][j] = alfabeto.charAt(Math.floor(Math.random() * 26));
+            }
+        }
+        // preenche o tabuleiro no html com blocos usando as letras do tabuleiro
+        var tabuleiro_elemento = document.getElementById("tabuleiro");
+        var tabuleiro_html = [];
+        for(var i = 0; i < tamanho; i ++)
+        {
+            var line = document.createElement("div");
+            tabuleiro_html[i] = [];
+            for(var j = 0; j < tamanho; j++)
+            {
+                quadrado_letra = criaQuadrado(i, j, tabuleiro_html);
+                line.appendChild(quadrado_letra);
+            }
+            tabuleiro_elemento.appendChild(line);
+        }
+        
+        palavras = {};
+        palavra[0] = ["zoo", [0, 0], [0, 2]];
+        for(var i = palavras[0][1][1]; i < palavras[0][2][1]; i++)
+        {
+            quadrado_letra = criaQuadrado(0, i, tabuleiro_html);
+            tab
+        }
+
+        function preenchaQuadradosEmAlcance(inicio, fim)
+        {
+            var x = parseInt(inicio.getAttribute("x"));
+            var y = parseInt(inicio .getAttribute("y"));
+            var final_x = parseInt(fim.getAttribute("x"));
+            var final_y = parseInt(fim.getAttribute("y"));
+            if(final_x < x)
+            {
+                final_x = [x, x = final_x][0];
+            }
+            if(final_y < y)
+            {
+                final_y = [y, y = final_y][0];
+            }
+
+            if(final_x == x)
+            {
+                for(var j = y; j <= final_y; j++)
+                {
+                    tabuleiro_html[x][j].classList.add("selecionado");
+                }
+            }
+            else if(final_y == y)
+            {
+                for(var i = x; i <= final_x; i++)
+                {
+                    tabuleiro_html[i][y].classList.add("selecionado");
+                }
+            }
+            /*
+            else if(Math.abs(final_y - y) == Math.abs(final_x - x))
+            {
+                for(var i = x; i <= final_x; i++)
+                {
+                    
+                }
+            }
+            */
+
+        }
+
+        function quadradoClicado(evento){
+            if(selecionados.length > 0){
+                if(evento.target.classList.contains("selecionado"))
+                {
+                    selecionados[0].classList.remove("selecionado");
+                    selecionados = [];
+                }
+                else
+                {
+                    preenchaQuadradosEmAlcance(selecionados[0], evento.target);
+                }
+            }
+            else
+            {
+                selecionados[0] = evento.target;
+                selecionados[0].classList.add("selecionado");
+            }
+        }
+
+        function criaQuadrado(x, y, tabuleiro_jogavel)
+        {
+            var letra_elemento = document.createElement("div");
+            letra_elemento.innerHTML = tabuleiro[x][y];
+            letra_elemento.classList.add("bloco");
+            letra_elemento.setAttribute('x', x);
+            letra_elemento.setAttribute('y', y);
+            letra_elemento.addEventListener("click", quadradoClicado);
+            tabuleiro_jogavel[x][y] = letra_elemento;
+            return letra_elemento;
+        }
+    
+    </script>
+</body>
+</html>

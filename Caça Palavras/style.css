@@ -1,0 +1,13 @@
+.bloco{
+    display: inline-block;
+    padding: 1.5em;
+}
+
+#tabuleiro{
+    border: 2px solid black;
+    display: inline-block;
+}
+
+.selecionado{
+    color: orange;
+}
